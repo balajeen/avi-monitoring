@@ -1,0 +1,150 @@
+{
+    "AlertConfig": [
+        {
+            "action_group_ref": "/api/actiongroupconfig/?tenant=admin&name=System-Alert-Level-Medium",
+            "alert_rule": {
+                "sys_event_rule": [
+                    {
+                        "event_id": "SERVER_DOWN",
+                        "not_cond": false
+                    }
+                ]
+            },
+            "autoscale_alert": true,
+            "category": "REALTIME",
+            "expiry_time": 86400,
+            "name": "TEST_AUTOSCALE_TRIGGER_SCALEOUT",
+            "source": "EVENT_LOGS",
+            "summary": "Autoscale trigger when server is down",
+            "threshold": 1,
+            "throttle": 0
+        },
+        {
+            "action_group_ref": "/api/actiongroupconfig/?tenant=admin&name=System-Alert-Level-Medium",
+            "alert_rule": {
+                "sys_event_rule": [
+                    {
+                        "event_id": "SERVER_AUTOSCALE_OUT"
+                    }
+                ]
+            },
+            "autoscale_alert": true,
+            "category": "REALTIME",
+            "expiry_time": 86400,
+            "name": "TEST_AUTOSCALE_TRIGGER_SCALEIN",
+            "source": "EVENT_LOGS",
+            "summary": "Autoscale OUT",
+            "threshold": 1,
+            "throttle": 0
+        },
+        {
+            "action_group_ref": "/api/actiongroupconfig/?tenant=admin&name=System-Alert-Level-Medium",
+            "alert_rule": {
+                "sys_event_rule": [
+                    {
+                        "event_id": "SERVER_AUTOSCALE_IN"
+                    }
+                ]
+            },
+            "autoscale_alert": true,
+            "category": "REALTIME",
+            "expiry_time": 86400,
+            "name": "SERVER_AUTOSCALE_IN",
+            "source": "EVENT_LOGS",
+            "summary": "Autoscale IN",
+            "threshold": 1,
+            "throttle": 0
+        }
+    ],
+    "AlertScriptConfig": [
+        {
+            "action_script": "#!/usr/bin/python \nimport sys \nfrom avi.sdk.samples.autoscale.samplescaleout import autoscale \nautoscale(*sys.argv)\n",
+            "name": "SERVER_SCALEOUT_MODULE"
+        },
+        {
+            "action_script": "#!/usr/bin/python \nimport sys \nfrom avi.sdk.samples.autoscale.samplescaleout import autoscale \nautoscale(*sys.argv)\n",
+            "name": "SERVER_SCALEIN_MODULE"
+        }
+    ],
+    "ApplicationProfile": [
+        {
+            "http_profile": {
+                "connection_multiplexing_enabled": true,
+                "xff_enabled": false
+            },
+            "name": "test-app-profile",
+            "type": "APPLICATION_PROFILE_TYPE_HTTP"
+        }
+    ],
+    "HealthMonitor": [
+        {
+            "failed_checks": 2,
+            "name": "healthmonitor-1",
+            "receive_timeout": 2,
+            "send_interval": 3,
+            "successful_checks": 1,
+            "tcp_monitor": {},
+            "type": "HEALTH_MONITOR_TCP"
+        }
+    ],
+    "NetworkProfile": [
+        {
+            "name": "test-nw-profile",
+            "profile": {
+                "tcp_proxy_profile": {
+                    "idle_connection_timeout": 300,
+                    "idle_connection_type": "CLOSE_IDLE"
+                },
+                "type": "PROTOCOL_TYPE_TCP_PROXY"
+            }
+        }
+    ],
+    "ServerAutoScalePolicy": [
+        {
+            "intelligent_autoscale": false,
+            "max_size": 3,
+            "min_size": 1,
+            "name": "asp-manual",
+            "scalein_cooldown": 5,
+            "scaleout_cooldown": 5
+        },
+        {
+            "intelligent_autoscale": true,
+            "intelligent_scalein_margin": 80,
+            "intelligent_scaleout_margin": 20,
+            "max_size": 4,
+            "min_size": 1,
+            "name": "asp-intelligent",
+            "scalein_cooldown": 60,
+            "scaleout_cooldown": 60
+        },
+        {
+            "intelligent_autoscale": true,
+            "intelligent_scalein_margin": 80,
+            "intelligent_scaleout_margin": 20,
+            "max_size": 4,
+            "min_size": 1,
+            "name": "asp-scale",
+            "scalein_cooldown": 60,
+            "scaleout_cooldown": 60
+        },
+        {
+            "intelligent_autoscale": false,
+            "max_size": 3,
+            "min_size": 1,
+            "name": "asp-manual-w-alerts",
+            "scalein_cooldown": 5,
+            "scaleout_cooldown": 5
+        },
+        {
+            "intelligent_autoscale": true,
+            "intelligent_scalein_margin": 80,
+            "intelligent_scaleout_margin": 20,
+            "max_size": 4,
+            "min_size": 1,
+            "name": "asp-intelligent-w-alerts",
+            "scalein_cooldown": 60,
+            "scaleout_cooldown": 60
+        }
+    ]
+}

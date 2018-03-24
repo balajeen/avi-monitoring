@@ -1,0 +1,191 @@
+{
+   "Pool": [
+        {
+            "name": "pool-2",
+            "enabled": true,
+            "servers": [
+                {
+                    "ip": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    },
+                    "enabled": true,
+                    "port": 8000,
+                    "handle": "s2",
+                    "app_type": "httptest"
+                }
+            ]
+        },
+        {
+            "name": "pool-1",
+            "enabled": true,
+            "servers": [
+                {
+                    "ip": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    },
+                    "enabled": true,
+                    "port": 8000,
+                    "handle": "s1",
+                    "app_type": "httptest"
+                }
+            ]
+        },
+        {
+            "name": "pool-3",
+            "enabled": true,
+            "servers": [
+                {
+                    "ip": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    },
+                    "enabled": true,
+                    "port": 8000,
+                    "handle": "s3",
+                    "app_type": "httptest"
+                }
+            ]
+        },
+        {
+            "name": "pool-4",
+            "enabled": true,
+            "servers": [
+                {
+                    "ip": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    },
+                    "enabled": true,
+                    "port": 8000,
+                    "handle": "s4",
+                    "app_type": "httptest"
+                }
+            ]
+        },
+        {
+            "name": "pool-5",
+            "enabled": true,
+            "servers": [
+                {
+                    "ip": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    },
+                    "enabled": true,
+                    "port": 8000,
+                    "handle": "s5",
+                    "app_type": "httptest"
+                }
+            ]
+        }
+    ],
+    "VirtualService": [
+        {
+            "name": "vs-2",
+            "enabled": true,
+            "vip": [
+                {
+                    "enabled": true,
+                    "ip_address": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    }
+                }
+            ],
+            "pool_ref": "/api/pool/?name=pool-2",
+            "services": [
+                {
+                    "enable_ssl": false,
+                    "port_range_end": 8000,
+                    "port": 8000
+                }
+            ]
+        },
+        {
+            "name": "vs-1",
+            "enabled": true,
+            "vip": [
+                {
+                    "enabled": true,
+                    "ip_address": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    }
+                }
+            ],
+            "pool_ref": "/api/pool/?name=pool-1",
+            "services": [
+                {
+                    "enable_ssl": false,
+                    "port_range_end": 8000,
+                    "port": 8000
+                }
+            ]
+        },
+        {
+            "name": "vs-3",
+            "enabled": true,
+            "vip": [
+                {
+                    "enabled": true,
+                    "ip_address": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    }
+                }
+            ],
+            "pool_ref": "/api/pool/?name=pool-3",
+            "services": [
+                {
+                    "enable_ssl": false,
+                    "port_range_end": 8000,
+                    "port": 8000
+                }
+            ]
+        },
+        {
+            "name": "vs-4",
+            "enabled": true,
+            "vip": [
+                {
+                    "enabled": true,
+                    "ip_address": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    }
+                }
+            ],
+            "pool_ref": "/api/pool/?name=pool-4",
+            "services": [
+                {
+                    "enable_ssl": false,
+                    "port_range_end": 8000,
+                    "port": 8000
+                }
+            ]
+        },
+        {
+            "name": "vs-5",
+            "enabled": true,
+            "vip": [
+                {
+                    "enabled": true,
+                    "ip_address": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    }
+                }
+            ],
+            "pool_ref": "/api/pool/?name=pool-5",
+            "services": [
+                {
+                    "enable_ssl": false,
+                    "port_range_end": 8000,
+                    "port": 8000
+                }
+            ]
+        }
+    ]
+}

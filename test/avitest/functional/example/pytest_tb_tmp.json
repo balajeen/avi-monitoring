@@ -1,0 +1,89 @@
+{
+"Vm": [
+    {
+    "name": "client1",
+    "type": "client",
+    "ip": "",
+    "mask": "255.255.255.0",
+    "static": "yes",
+    "host": "esx-65.avi-local",
+    "cluster": "",
+    "datacenter": "",
+    "virtualization": "",
+    "networks":
+        {
+            "mgmt": "mgmt_N3k",
+            "data": ["net1"]
+        }
+    },
+    {
+    "name": "client2",
+    "type": "client",
+    "ip": "",
+    "mask": "255.255.255.0",
+    "static": "yes",
+    "host": "esx-65.avi-local",
+    "cluster": "",
+    "datacenter": "",
+    "virtualization": "",
+    "networks":
+        {
+            "mgmt": "mgmt_N3k",
+            "data": ["net1"]
+        }
+    },
+    {
+    "name": "server1",
+    "type": "server",
+    "ip": "",
+    "mask": "255.255.255.0",
+    "static": "yes",
+    "host": "esx-65.avi-local",
+    "cluster": "",
+    "datacenter": "",
+    "virtualization": "",
+    "networks":
+        {
+            "mgmt": "mgmt_N3k",
+            "data": ["net1", "net2"]
+        }
+    },
+    {
+    "name": "controller1",
+    "type": "controller",
+    "ip" : " ",
+    "mask": "255.255.255.0",
+    "static": "yes",
+    "host": "esx-65.avi-local",
+    "cluster": "",
+    "datacenter": "",
+    "Virtualization": "",
+    "Networks":
+        {
+            "mgmt": "mgmt_N3k"
+        }
+    },
+    {
+    "name": "se1",
+    "type": "se",
+    "ip": "",
+    "mask": "255.255.255.0",
+    "static": "yes",
+    "host": "esx-65.avi-local",
+    "cluster": "",
+    "datacenter": "",
+    "virtualization": "",
+    "networks": {
+            "mgmt": "$mgmt1",
+            "data": ["$net1", "$net2"]
+        }
+    }
+],
+
+"Networks":
+    {
+    "mgmt1": { "name":"mgmt_N3k", "ip":"10.10.22.0", "mask":"24"},
+    "net1": { "name":"pg-786", "ip":"10.70.86.0", "mask":"24"},
+    "net2": { "name":"pg-635", "ip":"10.70.135.0", "mask":"24"}
+    }
+}

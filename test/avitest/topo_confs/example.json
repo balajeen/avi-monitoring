@@ -1,0 +1,61 @@
+{
+ "Vm": [
+     {
+        "name": "openshift-master",
+        "type": "controller",
+        "ip": "10.160.63.2",
+        "mask": "255.255.255.0",
+        "port": 5098,
+        "api_port":9443,
+        "user": "admin",
+        "password": "$adminpassword",
+        "deployment": "CONTAINER_DEPLOYMENT"
+     },
+     {
+        "name": "client",
+        "type": "client",
+        "ip": "10.160.0.124",
+        "mask": "255.255.255.0",
+        "networks": {
+            "data": [
+                "net1"
+            ]
+        },
+     }
+    ],
+    "Cloud": [
+    {
+        "name": "Default-Cloud",
+        "tenant_ref": "/api/tenant/?name=admin",
+        "vtype": "CLOUD_OSHIFT_K8S",
+        "oshiftk8s_configuration": {
+            "master_nodes": [
+              "https://10.160.63.64:8443"
+            ],
+          "client_tls_key_and_certificate_uuid": "$path/to/admin.key,$path/to/admin.crt",
+          "ca_tls_key_and_certificate_uuid": "$path/to/ca.crt",
+            "east_west_placement_subnet": {
+                "ip_addr": {
+                  "addr": "172.18.0.0",
+                  "type": "V4"
+                },
+                "mask": 16
+            },
+          "se_deployment_method": "SE_CREATE_SSH",
+          "ssh_user_uuid": "root",
+            "docker_registry_se": {
+                "registry": "$private-docker-registry:5000/openshift",
+                "private": true,
+                "se_repository_push": true
+            }
+        }
+    }
+    ],
+    "Networks": {
+         "net1": {
+            "name": "PG-063",
+            "ip": "10.160.63.0",
+            "mask": "24"
+        }
+    }
+}

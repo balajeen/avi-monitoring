@@ -1,0 +1,78 @@
+{
+   "Pool": [
+        {
+            "name": "pool-1",
+            "enabled": true,
+            "servers": [
+                {
+                    "ip": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    },
+                    "enabled": true,
+                    "port": 8000,
+                    "handle": "s1",
+                    "app_type": "httptest"
+                }
+            ]
+        },
+        {
+            "name": "pool-2",
+            "enabled": true,
+            "servers": [
+                {
+                    "ip": {
+                        "type": "V4",
+                        "addr": "${net}"
+                    },
+                    "enabled": true,
+                    "port": 8000,
+                    "handle": "s2",
+                    "app_type": "httptest"
+                }
+            ]
+        }
+    ],
+    "VirtualService": [
+        {
+            "name": "vs-1",
+            "enabled": true,
+            "vip": [
+                {
+                    "enabled": true,
+                    "auto_allocate_ip":true,
+		    "subnet_uuid":"${subnet_uuid}",
+		    "auto_allocate_floating_ip":true
+		}
+            ],
+            "pool_ref": "/api/pool/?name=pool-1",
+            "services": [
+                {
+                    "enable_ssl": false,
+                    "port_range_end": 8000,
+                    "port": 8000
+                }
+            ]
+        },
+        {
+            "name": "vs-2",
+            "enabled": true,
+            "vip": [
+                {
+                    "enabled": true,
+                    "auto_allocate_ip":true,
+		    "subnet_uuid":"${subnet_uuid}",
+		    "auto_allocate_floating_ip":true
+		}
+            ],
+            "pool_ref": "/api/pool/?name=pool-2",
+            "services": [
+                {
+                    "enable_ssl": false,
+                    "port_range_end": 8000,
+                    "port": 8000
+                }
+            ]
+	}
+    ]
+}

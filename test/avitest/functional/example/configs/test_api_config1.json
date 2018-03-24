@@ -1,0 +1,24 @@
+{
+    "VirtualService": [
+        {
+            "name": "vs-2",
+            "enabled": true,
+            "vip": [
+                {
+                    "enabled": true,
+                    "ip_address": {
+                        "type": "V4",
+                        "addr": "10.70.137.71"
+                    }
+                }
+            ],
+            "services": [
+                {
+                    "enable_ssl": false,
+                    "port_range_end": 8000,
+                    "port": 8000
+                }
+            ]
+        }
+   ]
+}

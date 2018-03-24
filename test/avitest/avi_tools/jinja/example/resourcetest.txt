@@ -1,0 +1,16 @@
+*** Settings ***
+Resource          common.robot
+
+*** Test Cases ***
+
+Call No Arg Keyword
+    no_arg_keyword
+
+Call Arg Keyword
+    args_keyword    1    2    3
+
+Suite Var Setting
+    vs_is_well    myname    10
+    Should Be True    ${myname-10}==10
+    vs_is_well    othername    20    timeout=20
+    Should Be True    ${othername-20}==20

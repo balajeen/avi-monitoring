@@ -1,0 +1,72 @@
+source: "test_cloud_default_cloud.json"
+source: "test_cloud_cloud_2.json"
+{
+    "Pool": [
+        {
+            "name": "pool-crud",
+            "tenant_ref": "/api/tenant/?name=admin",
+            "cloud_ref": "/api/cloud/?tenant=admin&name=Default-Cloud",
+            "servers": [
+                {
+                    "app_type": "httptest",
+                    "enabled": true,
+                    "handle": "pool-crud-s1",
+                    "ip": {
+                        "addr": "${net1}",
+                        "type": "V4"
+                    },
+                    "port": 80,
+                    "ratio": 1
+                },
+                {
+                    "app_type": "httptest",
+                    "enabled": true,
+                    "handle": "pool-crud-s2",
+                    "ip": {
+                        "addr": "${net1}",
+                        "type": "V4"
+                    },
+                    "port": 8000,
+                    "ratio": 1
+                }
+            ],
+            "uuid": ""
+        }
+    ],
+    "Tenant": [
+        {
+            "description": "tenant-crud",
+            "name": "tenant-crud",
+            "uuid": "tenant-crud"
+        }
+    ],
+    "VirtualService": [
+        {
+            "tenant_ref": "/api/tenant/?name=admin",
+            "cloud_ref": "/api/cloud/?tenant=admin&name=Default-Cloud",
+            "analytics_policy": {
+                "full_client_logs": {
+                    "duration": 0,
+                    "enabled": true
+                }
+            },
+            "name": "virtualservice-crud",
+            "pool_ref": "/api/pool/?tenant=admin&name=pool-crud&cloud=Default-Cloud",
+            "services": [
+                {
+                    "port": 9000
+                }
+            ],
+            "uuid": "",
+            "vip": [
+                {
+                    "ip_address": {
+                        "addr": "${net1}",
+                        "type": "V4"
+                    },
+                    "vip_id": "0"
+                }
+            ]
+        }
+    ]
+}
