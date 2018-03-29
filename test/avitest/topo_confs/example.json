@@ -14,7 +14,7 @@
      {
         "name": "client",
         "type": "client",
-        "ip": "10.160.0.124",
+        "ip": "10.160.0.123",
         "mask": "255.255.255.0",
         "networks": {
             "data": [

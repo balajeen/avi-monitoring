@@ -1527,13 +1527,18 @@ def check_microservice_metrics(src_vs, dst_vs, **kwargs):
         kwargs['step'] = 5
     logger.debug('check_microservice_metrics %s -> %s kwargs %s' % (
               src_vs, dst_vs, str(kwargs)))
-    mapi_test = metrics_lib.get_metrics_api_tests(tenant=tenant)
+    old_tenant = infra_utils.get_config().get_mode(key='tenant')
+    infra_utils.switch_mode(tenant=tenant)
+    mapi_test = metrics_lib.get_metrics_api_tests()
+    infra_utils.switch_mode(tenant=src_vs_tenant)
     src_vs_uuid = rest.get_uuid_by_name('virtualservice', src_vs)
+    infra_utils.switch_mode(tenant=dst_vs_tenant)
     dst_vs_uuid = rest.get_uuid_by_name('virtualservice', dst_vs)
 
     kwargs['dimension_aggregation'] = 'sum'
     mapi_test.microserviceEdgeTrafficCheck(src_vs_uuid, dst_vs_uuid,
                                            **kwargs)
+    infra_utils.switch_mode(tenant=old_tenant)
 
 
 def delete_app(app_name, force=False, verify_dns=True, dns_suffix='',

@@ -70,8 +70,9 @@ def get_metrics_api_tests(tenant='admin'):
     port = controller_lib.get_controller_port()
     if port:
         controller_ip = controller_ip + ":" + port
+    mode = infra_utils.get_mode()
     avi_settings = {'controller_ip': controller_ip,
-                    'user': 'admin', 'passwd': 'avi123', 'tenant': tenant}
+                    'user': mode['user'], 'passwd': mode['password'], 'tenant': mode['tenant']}
     test_metrics_api.avi_settings = avi_settings
     test_metrics_api.setUpModule()
     metrics_api_tests = test_metrics_api.MetricsApiTest()
