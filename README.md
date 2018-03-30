@@ -15,19 +15,19 @@ Intended to demonstrate how to run provided tests against external environments.
   * cloud configuration: openshift master and credentials (key files), private docker registry if applicable
   * net1 network definition for your client (e.g. PortGroup name and subnet in vcenter)
 
-### Caveats:
-Tested against internally deployed controllers so framework assume some settings that don't match your deployment. <br />
+#### Caveats:
+Tested against internally deployed controllers so framework may assume some settings that don't match your deployment. <br />
 Older package versions not verified; if in doubt reinstall to the latest.
 
 ## Run:
 From ~/test/avitest, execute <br />
-`pytest --loglevel DEBUG --testbed topo_confs/example.json <testname> [pytest options, marks and filters] [--robot_html <desired html logfile>]`
+`pytest --loglevel DEBUG --testbed topo_confs/example.json <testname> [pytest options, marks and filters] [--robot_html <desired html logfile>]` <br/>
 e.g. <br />
 `pytest --loglevel DEBUG --testbed topo_confs/example.json functional/mesos/test_mesos_basic.py -s -v -m "not auth and not attribute" --robot_html basic.html`
 
-### Notes:
-* The --robot_html flag enables Robot Framework-style log files; alternatively can install and use pytest-html package.
-* Test class runs against internal setups with different authentication and slave node attributes, hence excluding them from the test run to only execute the generic test cases.
+#### Notes:
+* The --robot_html flag enables Robot Framework-style log files; alternatively install and use pytest-html package.
+* Full test runs against internal testbeds with different authentication and slave node attributes, hence excluding them from this example to only execute the general test cases.
 
 Additional tests and examples in the ~/test/avitest/functional/example folder (some may be out of date). <br />
 Specific functional tests available by request.
